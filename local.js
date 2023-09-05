@@ -14,7 +14,7 @@ const displayProduct = (product, quantity) => {
     const ol = document.getElementById('product-container');
     const li = document.createElement('li');
 
-    li.innerText = `${itemCounter}. ${product}: ${quantity}`;
+    li.innerText = `${itemCounter}. ${product}= ${quantity}`;
     ol.appendChild(li);
 
     totalQuantity += quantity; // Update totalQuantity
