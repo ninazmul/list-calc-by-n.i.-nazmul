@@ -68,10 +68,24 @@ const addProduct = () => {
         productField.value = '';
         productQuantity.value = '';
 
+        // Get the current cart from localStorage
+        const cart = getStoredShoppingCart();
+
+        // Add the new product and quantity to the cart
+        if (cart.hasOwnProperty(product)) {
+            cart[product] += quantity;
+        } else {
+            cart[product] = quantity;
+        }
+
+        // Save the updated cart to localStorage
+        saveProductToLocalStorage(cart);
+
+        // Display the product in the UI
         displayProduct(product, quantity);
-        saveProductToLocalStorage(getStoredShoppingCart()); // Update localStorage
     }
 }
+
 
 let totalQuantity = 0;
 
