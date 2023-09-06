@@ -9,19 +9,48 @@ const clearCart = () => {
 }
 
 let itemCounter = 1; // Initialize the item counter
-
 const displayProduct = (product, quantity) => {
     const ol = document.getElementById('product-container');
     const li = document.createElement('li');
+    
+    // Create a remove button for each item
+    const removeButton = document.createElement('button');
+    removeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="8" stroke="white" class="w-6 h-4 bg-red-500 rounded-md btn btn-xs ">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+  </svg>
+  
+  `;
+    
+    // Add a click event listener to the remove button
+    removeButton.addEventListener('click', () => {
+        removeFromCart(product);
+        ol.removeChild(li); // Remove the item from the UI
+    });
 
-    li.innerText = `${itemCounter}. ${product}= ${quantity}`;
+    li.innerText = `${itemCounter}. ${product} = ${quantity} `;
+    
+    // Append the remove button to the list item
+    li.appendChild(removeButton);
+    
     ol.appendChild(li);
 
-    totalQuantity += quantity; // Update totalQuantity
+    totalQuantity += quantity;
     displayTotalQuantity(totalQuantity);
 
-    itemCounter++; // Increment the item counter
+    itemCounter++;
 }
+
+const removeFromCart = (product) => {
+    const cart = getStoredShoppingCart();
+    
+    if (cart.hasOwnProperty(product)) {
+        totalQuantity -= cart[product];
+        delete cart[product];
+        saveProductToLocalStorage(cart);
+        displayTotalQuantity(totalQuantity);
+    }
+}
+
 
 
 const getStoredShoppingCart = () => {
