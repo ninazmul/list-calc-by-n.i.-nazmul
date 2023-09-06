@@ -6,7 +6,9 @@ const clearCart = () => {
     }
     totalQuantity = 0;
     displayTotalQuantity(totalQuantity);
+    itemCounter = 1; // Reset the item counter to 1
 }
+
 
 let itemCounter = 1; // Initialize the item counter
 const displayProduct = (product, quantity) => {
@@ -17,9 +19,7 @@ const displayProduct = (product, quantity) => {
     const removeButton = document.createElement('button');
     removeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="8" stroke="white" class="w-6 h-4 bg-red-500 rounded-md btn btn-xs ">
     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-  </svg>
-  
-  `;
+  </svg>`;
     
     // Add a click event listener to the remove button
     removeButton.addEventListener('click', () => {
@@ -37,7 +37,7 @@ const displayProduct = (product, quantity) => {
     totalQuantity += quantity;
     displayTotalQuantity(totalQuantity);
 
-    itemCounter++;
+    itemCounter++; // Increment the item counter
 }
 
 const removeFromCart = (product) => {
@@ -50,8 +50,6 @@ const removeFromCart = (product) => {
         displayTotalQuantity(totalQuantity);
     }
 }
-
-
 
 const getStoredShoppingCart = () => {
     const storedCart = localStorage.getItem('cart');
@@ -67,8 +65,6 @@ const saveProductToLocalStorage = (cart) => {
     localStorage.setItem('cart', cartStringified);
 }
 
-// ... (previous code)
-
 const calculateAndDisplayTotalQuantity = () => {
     const savedCart = getStoredShoppingCart();
     let total = 0;
@@ -82,9 +78,6 @@ const calculateAndDisplayTotalQuantity = () => {
     totalQuantity = total; // Update totalQuantity
     displayTotalQuantity(totalQuantity);
 }
-
-// ... (rest of your code)
-
 
 const addProduct = () => {
     const productField = document.getElementById('product-name');
@@ -114,7 +107,6 @@ const addProduct = () => {
         displayProduct(product, quantity);
     }
 }
-
 
 let totalQuantity = 0;
 
